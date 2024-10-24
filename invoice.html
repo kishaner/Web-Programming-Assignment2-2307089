@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PredShoes - Invoice</title>
+	<link rel="stylesheet" href="styles.css">
+    <style>
+        .invoice {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .total-price {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <h1>Invoice</h1>
+        <div id="invoiceItems"></div>
+        <div class="total-price" id="totalPrice"></div>
+        <button onclick="window.location.href='products.html'">Exit</button>
+    </div>
+
+    <script>
+        const invoiceData = JSON.parse(sessionStorage.getItem('invoiceData')) || [];
+        let subtotal = 0;
+        const taxRate = 0.08;
+        const invoiceItemsDiv = document.getElementById('invoiceItems');
+
+        invoiceData.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            invoiceItemsDiv.innerHTML += `<div class="invoice-item">${item.name} (x${item.quantity}) - $${itemTotal.toFixed(2)}</div>`;
+        });
+
+        const tax = subtotal * taxRate;
+        const total = subtotal + tax;
+
+        document.getElementById('totalPrice').textContent = `Subtotal: $${subtotal.toFixed(2)} | Tax: $${tax.toFixed(2)} | Total Price: $${total.toFixed(2)}`;
+    </script>
+</body>
+</html>

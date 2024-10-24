@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PredShoes - Login</title>
+	<link rel="stylesheet" href="styles.css">
+    <style>
+
+        div {
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        form {
+            display: inline-block;
+            padding: 20px;
+        }
+
+        input[type="text"]{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+		input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #009688;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+		
+		img {
+            width: 20%;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="Assets/logo.png">
+        <h1>Login to PredShoes</h1>
+        <form onsubmit="return loginUser(event)">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" minlength="8" required>
+            <input type="submit" value="Login">
+        </form>
+        <p class="error" id="error-msg">Invalid username or password. Try again.</p>
+    </div>
+
+    <script>
+        const SAMPLE_USERNAME = 'sample';
+        const SAMPLE_PASSWORD = 'sample12';
+        let loginAttempts = 0;
+
+        function loginUser(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === SAMPLE_USERNAME && password === SAMPLE_PASSWORD) {
+                window.location.href = "products.html";
+            } else {
+                loginAttempts++;
+                document.getElementById('error-msg').style.display = 'block';
+                if (loginAttempts >= 3) {
+                    window.location.href = "error.html";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

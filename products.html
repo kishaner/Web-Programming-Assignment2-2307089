@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PredShoes - Products</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+
+        .products-div {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.3%;
+            margin-top: 20px;
+			padding: 20px;
+        }
+
+        .products {
+            border: 2px solid;
+            padding: 10px;
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            max-height: 50%;
+            object-fit: cover;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="Assets/logo.png" alt="PredShoes Logo">
+		<h1>Predator not Prey</h1>
+        <div class="links">
+            <a href="#">Shoes</a>
+            <a href="about.html">About Us</a>
+        </div>
+    </div>
+
+    <div class="products-div">
+        <div class="products">
+            <img src="Assets/product1.png" class="product-image">
+            <h3>Air Pred 1s</h3>
+            <p>$100</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="0">
+        </div>
+        <div class="products">
+            <img src="Assets/product2.png" class="product-image">
+            <h3>Air Pred 2s</h3>
+            <p>$200</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="1">
+        </div>
+        <div class="products">
+            <img src="Assets/product3.png" class="product-image">
+            <h3>Predator Slides</h3>
+            <p>$300</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="2">
+        </div>
+        <div class="products">
+            <img src="Assets/product4.png" class="product-image">
+            <h3>Pred Force</h3>
+            <p>$400</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="3">
+        </div>
+        <div class="products">
+            <img src="Assets/product5.png" class="product-image">
+            <h3>Pred Brigade</h3>
+            <p>$150</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="4">
+        </div>
+        <div class="products">
+            <img src="Assets/product6.png" class="product-image">
+            <h3>Pred Max</h3>
+            <p>$250</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="5">
+        </div>
+        <div class="products">
+            <img src="Assets/product7.png" class="product-image">
+            <h3>Pred Revolution</h3>
+            <p>$350</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="6">
+        </div>
+        <div class="products">
+            <img src="Assets/product8.png" class="product-image">
+            <h3>Pred Equator</h3>
+            <p>$450</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="7">
+        </div>
+        <div class="products">
+            <img src="Assets/product9.png" class="product-image">
+            <h3>Pred Athor</h3>
+            <p>$500</p>
+            <input type="number" min="0" max="10" value="0" onchange="updateTotal()" data-index="8">
+        </div>
+    </div>
+
+    <button onclick="checkout()">Checkout</button>
+
+    <script>
+        const products = [
+            { name: "Air Pred 1s", price: 100 },
+            { name: "Air Pred 2s", price: 200 },
+            { name: "Predator Slides", price: 300 },
+            { name: "Pred Force", price: 400 },
+            { name: "Pred Brigade", price: 150 },
+            { name: "Pred Max", price: 250 },
+            { name: "Pred Revolution", price: 350 },
+            { name: "Pred Equator", price: 450 },
+            { name: "Pred Athor", price: 500 }
+        ];
+
+        function checkout() {
+            const selectedProducts = [];
+            const inputs = document.querySelectorAll('.products input[type="number"]');
+
+            inputs.forEach(input => {
+                const quantity = parseInt(input.value, 10);
+                if (quantity > 0) {
+                    const product = products[input.dataset.index];
+                    selectedProducts.push({ name: product.name, quantity: quantity, price: product.price });
+                }
+            });
+
+            sessionStorage.setItem('invoiceData', JSON.stringify(selectedProducts));
+            window.location.href = 'invoice.html';
+        }
+		
+    </script>
+</body>
+</html>
